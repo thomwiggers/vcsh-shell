@@ -1,6 +1,7 @@
 #!/bin/zsh
 
 # settings
+setopt AUTOCD
 setopt NO_BG_NICE
 setopt NO_HUP
 setopt NO_LIST_BEEP
@@ -62,17 +63,45 @@ setopt autopushd pushdsilent pushdtohome
 setopt pushdignoredups
 setopt pushdminus
 
-
 if [[ "$COLORTERM" == "gnome-terminal" ]]; then
     export TERM=xterm-256color
 fi
 
+# From http://dotfiles.org/~_why/.zshrc
+# Sets the window title nicely no matter where you are
+function title() {
+  # escape '%' chars in $1, make nonprintables visible
+  a=${(V)1//\%/\%\%}
+
+  # Truncate command, and join lines.
+  a=$(print -Pn "%40>...>$a" | tr -d "\n")
+
+  case $TERM in
+  screen)
+    print -Pn "\ek$a:$3\e\\" # screen title (in ^A")
+    ;;
+  xterm*|rxvt)
+    print -Pn "\e]2;$2:$3\a" # plain xterm title ($3 for pwd)
+    ;;
+  esac
+}
+
+function precmd {
+    title "zsh" "%m" "%55<...<%~"
+}
+
+## Completion
 autoload -U compinit
+# pasting with tabs doesn't perform completion
+zstyle ':completion:*' insert-tab pending
+
 
 if [ -e "/usr/bin/virtualenvwrapper_lazy.sh" ]; then
     export WORKON_HOME="$HOME/.pythonenvs"
     source "/usr/bin/virtualenvwrapper_lazy.sh"
 fi
+
+# Colours
 
 if [ -e /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
     source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
@@ -86,6 +115,8 @@ if [ -e /usr/share/zsh/site-contrib/powerline.zsh ]; then
     source /usr/share/zsh/site-contrib/powerline.zsh
 fi
 
+## aliases
+
 if $(which hub > /dev/null); then
     eval $(hub alias -s);
 fi
@@ -93,6 +124,7 @@ fi
 alias ls='ls --color=auto --quoting-style=literal'
 alias ll='ls -l --human-readable'
 alias la='ls -l --almost-all --human-readable'
+alias l='ls'
 alias cp='cp --reflink=auto '
 alias irc='ssh irc -t tmux a'
 alias mirc='mosh irc tmux a'
