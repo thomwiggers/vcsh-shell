@@ -111,8 +111,8 @@ if [ -e "$HOME/.dircolors" ]; then
     eval $(dircolors "$HOME/.dircolors")
 fi
 
-if [ -e /usr/share/zsh/site-contrib/powerline.zsh ]; then
-    source /usr/share/zsh/site-contrib/powerline.zsh
+if [ -e /usr/lib/python3.5/site-packages/powerline/bindings/zsh/powerline.zsh ]; then
+    source /usr/lib/python3.5/site-packages/powerline/bindings/zsh/powerline.zsh
 fi
 
 ## aliases
