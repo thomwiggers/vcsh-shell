@@ -129,4 +129,4 @@ alias cp='cp --reflink=auto '
 alias irc='ssh irc -t tmux a'
 alias mirc='mosh irc tmux a'
 alias clm='$HOME/clean/bin/clm'
-alias graderand="cd ./\$(grep -lr 'Needs Grading' | sort -R | cut -d'/' -f1 | head -1)"
+alias graderand="cd ./\$(grep -lr 'Needs Grading' s*/s*.txt | sort -R | cut -d'/' -f1 | head -1)"
