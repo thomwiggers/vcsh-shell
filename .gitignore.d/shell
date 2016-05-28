@@ -5,6 +5,10 @@
 !/.config/systemd
 !/.config/systemd/user
 !/.config/systemd/user/ssh-agent.service
+!/.config/systemd/user/ssh-watch-controlpersist.service
 !/.gitignore.d
 !/.gitignore.d/shell
+!/.local
+!/.local/lib
+!/.local/lib/watch-controlpersist-sockets.py
 !/.zshrc
