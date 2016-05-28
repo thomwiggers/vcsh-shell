@@ -1,0 +1,10 @@
+*
+!/.bash_profile
+!/.bashrc
+!/.config
+!/.config/systemd
+!/.config/systemd/user
+!/.config/systemd/user/ssh-agent.service
+!/.gitignore.d
+!/.gitignore.d/shell
+!/.zshrc
