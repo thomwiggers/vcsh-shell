@@ -48,21 +48,6 @@ HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
 
-# Dirstack
-DIRSTACKFILE="$HOME/.cache/zsh/dirs"
-DIRSTACKSIZE=20
-if [[ -f $DIRSTACKFILE ]] && [[ $#dirstack -eq 0 ]]; then
-  dirstack=( ${(f)"$(< $DIRSTACKFILE)"} )
-  [[ -d $dirstack[1] ]] && cd $dirstack[1]
-fi
-chpwd() {
-  print -l $PWD ${(u)dirstack} >$DIRSTACKFILE
-}
-
-setopt autopushd pushdsilent pushdtohome
-setopt pushdignoredups
-setopt pushdminus
-
 if [[ "$COLORTERM" == "gnome-terminal" ]]; then
     export TERM=xterm-256color
 fi
