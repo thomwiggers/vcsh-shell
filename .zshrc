@@ -77,6 +77,7 @@ function precmd {
 
 ## Completion
 autoload -U compinit
+compinit
 # pasting with tabs doesn't perform completion
 zstyle ':completion:*' insert-tab pending
 
@@ -106,12 +107,30 @@ if $(which hub > /dev/null); then
     eval $(hub alias -s);
 fi
 
+if $(which thefuck > /dev/null); then
+    eval $(thefuck --alias);
+fi
+
 alias ls='ls --color=auto --quoting-style=literal'
 alias ll='ls -l --human-readable'
 alias la='ls -l --almost-all --human-readable'
 alias l='ls'
+alias sl='ls'
 alias cp='cp --reflink=auto '
 alias irc='ssh irc -t tmux a'
 alias mirc='mosh irc tmux a'
 alias clm='$HOME/clean/bin/clm'
 alias graderand="cd ./\$(grep -lr 'Needs Grading' s*/s*.txt | sort -R | cut -d'/' -f1 | head -1)"
+
+package() {
+    tar cvJf "$1.tar.xz" "$*"
+}
+
+pb() {
+    echo "Pasting"
+    curl -sF "c=@${1:--}" -w "%{redirect_url}" 'https://ptpb.pw/?r=1' -o /dev/stderr | xsel -l /dev/null -b
+}
+
+open() {
+    xdg-open $@ 2> /dev/null
+}
