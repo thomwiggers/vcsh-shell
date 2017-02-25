@@ -81,6 +81,9 @@ compinit
 # pasting with tabs doesn't perform completion
 zstyle ':completion:*' insert-tab pending
 
+# XZ threaded
+XZ_OPTS="-T 8"
+
 
 if [ -e "/usr/bin/virtualenvwrapper_lazy.sh" ]; then
     export WORKON_HOME="$HOME/.pythonenvs"
