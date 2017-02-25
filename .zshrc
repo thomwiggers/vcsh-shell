@@ -37,8 +37,8 @@ bindkey "\e[1;5D" backward-word
 # Editor
 export EDITOR=vim
 
-# Path: add ruby
-export PATH="$HOME/.gem/ruby/2.3.0/bin:$PATH"
+# Path: add ruby, ruby
+export PATH="$HOME/.local/bin:$HOME/.gem/ruby/2.3.0/bin:$PATH"
 
 # SSH Agent with Systemd
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
@@ -137,3 +137,6 @@ pb() {
 open() {
     xdg-open $@ 2> /dev/null & disown
 }
+
+# initialize completion
+compinit
