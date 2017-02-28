@@ -106,7 +106,7 @@ fi
 
 ## aliases
 
-if $(which hub > /dev/null); then
+if $(which hub > /dev/null 2>&1); then
     eval $(hub alias -s);
 fi
 
@@ -122,7 +122,7 @@ alias sl='ls'
 alias cp='cp --reflink=auto '
 alias irc='ssh irc -t tmux a'
 alias mirc='mosh irc tmux a'
-alias clm='$HOME/clean/bin/clm'
+alias clm='$HOME/clean/bin/clm -I $HOME/clean/lib/StdEnv/ -I $HOME/clean/lib/Dynamics/'
 alias graderand="cd ./\$(grep -lr 'Needs Grading' s*/s*.txt | sort -R | cut -d'/' -f1 | head -1)"
 
 package() {
